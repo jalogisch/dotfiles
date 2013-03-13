@@ -9,7 +9,7 @@
 
 dir=~/dotfiles                    # dotfiles directory
 olddir=~/dotfiles_old             # old dotfiles backup directory
-files="aria2 bashrc gitconfig profile screenrc"    # list of files/folders to symlink in homedir
+files="aria2 bashrc gitconfig profile screenrc vim"    # list of files/folders to symlink in homedir
 
 ##########
 
