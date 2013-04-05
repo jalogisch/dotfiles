@@ -1,5 +1,3 @@
-# supplied via puppet
-
 export PS1='\h:\w\$ '
 umask 022
 
@@ -39,35 +37,24 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     	. /etc/bash_completion
 fi
 
-# Shell Prompt wird gebaut
+# Shell Prompt Build
 if [ "$PS1" ]; then
  
     # set terminal titlebar
     PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME%%.*}: ${PWD/$HOME/~}\007"'
     # define the prompt
 
-	parse_git_branch () {
- 	   git name-rev HEAD 2> /dev/null | sed 's#HEAD\ \(.*\)# (git::\1)#'
-	}
-	parse_svn_branch() {
-    	parse_svn_url | sed -e 's#^'"$(parse_svn_repository_root)"'##g' | awk '{print " (svn::"$1")" }'
-	}	
-	parse_svn_url() {
-    	svn info 2>/dev/null | sed -ne 's#^URL: ##p'
-	}
-	parse_svn_repository_root() {
-    	svn info 2>/dev/null | sed -ne 's#^Repository Root: ##p'
-	}
-
 	scm_ps1() {
-    local s=
-    if [[ -d ".svn" ]] ; then
-        s=\(svn:$(svn info | sed -n -e '/^Revision: \([0-9]*\).*$/s//\1/p' )\)
-    else
-        s=$(__git_ps1 "(git:%s)")
-    fi
-    echo -n "$s"
-}
+    		local s=
+    		if [[ -d ".svn" ]] ; then # we got SVN Repo
+        		s=\(svn:$(svn info | sed -n -e '/^Revision: \([0-9]*\).*$/s//\1/p' )\)
+    		elif type __git_ps1 2>/dev/null; then # we got GIT Repo (and tools for that)
+        		s=$(__git_ps1 "(git:%s)")
+    		else # we got nothing here
+       			s=
+    		fi
+	echo -n "$s"
+	}
 
 	BLACK="\[\033[0;38m\]"
 	RED="\[\033[0;31m\]"
