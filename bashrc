@@ -48,7 +48,7 @@ if [ "$PS1" ]; then
     		local s=
     		if [[ -d ".svn" ]] ; then # we got SVN Repo
         		s=\(svn:$(svn info | sed -n -e '/^Revision: \([0-9]*\).*$/s//\1/p' )\)
-    		elif type __git_ps1 2>/dev/null; then # we got GIT Repo (and tools for that)
+    		elif type __git_ps1 2>&1>/dev/null; then # we got GIT Repo (and tools for that)
         		s=$(__git_ps1 "(git:%s)")
     		else # we got nothing here
        			s=

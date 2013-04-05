@@ -9,14 +9,18 @@
 
 dir=~/dotfiles                    # dotfiles directory
 olddir=~/dotfiles_old             # old dotfiles backup directory
-files="aria2 bashrc gitconfig profile screenrc vim"    # list of files/folders to symlink in homedir
+files="aria2 bashrc gitconfig profile screenrc vim vimrc.before vimrc.after"    # list of files/folders to symlink in homedir
+
+DO_VIM=yes  # If you want vim to be installed with janus and all support (only debian)
 
 ##########
 
 # create dotfiles_old in homedir
-echo "Creating $olddir for backup of any existing dotfiles in ~"
-mkdir -p $olddir
-echo "...done"
+if [[ ! -d $olddir ]];then
+  echo "Creating $olddir for backup of any existing dotfiles in ~"
+  mkdir -p $olddir
+  echo "...done"
+fi
 
 # change to the dotfiles directory
 echo "Changing to the $dir directory"
@@ -25,15 +29,29 @@ echo "...done"
 
 # move any existing dotfiles in homedir to dotfiles_old directory, then create symlinks 
 for file in $files; do
-      echo "Moving any existing dotfiles from ~ to $olddir"
-      mv ~/.$file ~/dotfiles_old/
+      if [[ -f $file ]];then
+        echo "Moving '.$file' from ~ to $olddir"
+        mv ~/.$file $olddir/
+      fi
       echo "Creating symlink to $file in home directory."
       ln -s $dir/$file ~/.$file
 done
 
-# init submodules
-cd $dir
-git submodule update --init
+if [[ $DO_VIM == "yes" ]];then
+  if [ ! type vim.nox 2>&1>/dev/null ];then
+    sudo apt-get update -qq
+    sudo apt-get install vim-nox -y -qq
+  fi
+  # Install and Update janus
+  cd $dir
+  git submodule -q update --init
+  git submodule -q foreach git pull -q origin master
+  
+  cd $dir/vim
+  rake
+
+fi
+
 
 #### additionals
 echo "Please install 'bash-completion' (package name on debian/ubuntu) this is needed for the proper prompt"
