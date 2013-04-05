@@ -34,3 +34,6 @@ done
 # init submodules
 cd $dir
 git submodule update --init
+
+#### additionals
+echo "Please install 'bash-completion' (package name on debian/ubuntu) this is needed for the proper prompt"
