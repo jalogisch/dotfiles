@@ -3,8 +3,20 @@ dotfiles
 
 just another dotfile repo, inspired by [dotfiles](http://dotfiles.github.com/) and [michael smalley](http://blog.smalleycreative.com/tutorials/using-git-and-github-to-manage-your-dotfiles/) this is my part. 
 
+howto use
+==========
 
-after cloning
-=============
+you should have installed
 
-after clone of the repo and running the **install.sh** you need to initialise [janus](https://github.com/carlhuda/janus) with *rake* in the in *~/.vim*. You might also wish to configure your *vimrc.after* and *vimrc.before*.
+* git
+* rake
+* bash-completion
+* vim-nox 
+
+On Debian/Ubuntu: `apt-get install git rake bash-completion vim-nox` (as
+Root before you run the Installation
+
+
+After you got a clone with `git clone git://github.com/jalogisch/dotfiles.git --recursiv` just type in `bash -x install.sh` after you `cd dotfiles`.
+
+
