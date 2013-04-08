@@ -11,7 +11,7 @@ dir=~/dotfiles                    # dotfiles directory
 olddir=~/dotfiles_old             # old dotfiles backup directory
 files="aria2 bashrc gitconfig profile screenrc vim vimrc.before vimrc.after"    # list of files/folders to symlink in homedir
 
-DO_VIM=yes  # If you want vim to be installed with janus and all support (only debian)
+DO_VIM=yes  #If you want that janus is setup on your system
 
 ##########
 
@@ -33,25 +33,16 @@ for file in $files; do
         echo "Moving '.$file' from ~ to $olddir"
         mv ~/.$file $olddir/
       fi
+      if [[ -h $file ]];then
+        echo "Removing old Symlink from .$file"
+        rm -f ~/.$file
+      fi
       echo "Creating symlink to $file in home directory."
       ln -s $dir/$file ~/.$file
 done
 
+# we want to setup janus!
 if [[ $DO_VIM == "yes" ]];then
-  if [ ! type vim.nox 2>&1>/dev/null ];then
-    sudo apt-get update -qq
-    sudo apt-get install vim-nox -y -qq
-  fi
-  # Install and Update janus
-  cd $dir
-  git submodule -q update --init
-  git submodule -q foreach git pull -q origin master
-  
   cd $dir/vim
   rake
-
 fi
-
-
-#### additionals
-echo "Please install 'bash-completion' (package name on debian/ubuntu) this is needed for the proper prompt"
