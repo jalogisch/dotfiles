@@ -20,3 +20,7 @@ Root before you run the Installation
 After you got a clone with `git clone git://github.com/jalogisch/dotfiles.git --recursiv` just type in `bash -x install.sh` after you `cd dotfiles`.
 
 
+VIM
+===
+
+I use [janus](https://github.com/carlhuda/janus) for my vim Setup, so you should take a look there how to customize it to your needs.
