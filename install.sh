@@ -29,11 +29,11 @@ echo "...done"
 
 # move any existing dotfiles in homedir to dotfiles_old directory, then create symlinks 
 for file in $files; do
-      if [[ -f $file ]];then
+      if [[ -f ~/.$file ]];then
         echo "Moving '.$file' from ~ to $olddir"
         mv ~/.$file $olddir/
       fi
-      if [[ -h $file ]];then
+      if [[ -h ~/.$file ]];then
         echo "Removing old Symlink from .$file"
         rm -f ~/.$file
       fi
