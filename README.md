@@ -13,10 +13,15 @@ you should have installed
 * bash-completion
 * vim-nox 
 
-On Debian/Ubuntu: `apt-get install git rake bash-completion vim-nox` (newer Version) 
+On Debian/Ubuntu: `apt-get install git rake bash-completion vim-nox` (newer Version)
+
 Ubuntu Lucid: `apt-get install git-core rake bash-completion vim-nox`
-Ubuntu Hardy you need to Update GIT before (best via ppa): `apt-get install python-software-properties && add-apt-repository ppa:git-core/ppa && dpkg-reconfigure python-software-properties && apt-get update && apt-get install git` 
- after this you need to disable SSL Verification `export GIT_SSL_NO_VERIFY=true` and then you can clone and install. But you might need to disable some janus modules (vim 7.2 is the Version here)
+
+Ubuntu Hardy you need to Update GIT before (best via ppa): 
+`apt-get install python-software-properties && dpkg-reconfigure python-software-properties && add-apt-repository ppa:git-core/ppa && apt-get update && apt-get install git` 
+
+after this you need to disable SSL Verification `export GIT_SSL_NO_VERIFY=true` and then you can clone and install. But you might need to disable some janus modules (vim 7.2 is the Version here)
+
 
 If you got a _rake_ Error from Janus Install you should install `libopenssl-ruby1.8`
 
