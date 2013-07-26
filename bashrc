@@ -13,8 +13,8 @@ utf8()
             rm $1
             mv $1.tmp $1
 }
-
-
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
 
 # You may uncomment the following lines if you want `ls' to be colorized:
 export LS_OPTIONS='--color=auto'
@@ -49,7 +49,7 @@ fi
 if [ "$PS1" ]; then
  
     # changes the window title in terminals like putty or konsole
-    echo -ne "\033]0; ${USER}@${HOSTNAME}  +${SHLVL} @${SSH_TTY/\/dev\/} - `uptime1` \007"
+    echo -ne "\033]0; ${USER}@${HOSTNAME}  +${SHLVL} @${SSH_TTY/\/dev\/} - `uptime` \007"
 
     # check if there is a repo (svno r git) and show some information
     scm_ps1() {
