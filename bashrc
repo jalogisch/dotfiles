@@ -8,6 +8,15 @@ export EDITOR=vim
 alias confcat="sed -e 's/[#;].*//;/^\s*$/d' "$@""
 alias dl="aria2c --seed-time 1 --seed-ratio 0.1 -j4 -i --save-session=out.txt"
 
+utf8()
+{
+        iconv -f ISO-8859-1 -t UTF-8 $1 > $1.tmp
+            rm $1
+            mv $1.tmp $1
+}
+
+
+
 # You may uncomment the following lines if you want `ls' to be colorized:
 export LS_OPTIONS='--color=auto'
 eval "`dircolors`"
