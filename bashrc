@@ -1,4 +1,3 @@
-export PS1='\h:\w\$ '
 umask 022
 
 # editor
@@ -49,11 +48,11 @@ fi
 # Shell Prompt Build
 if [ "$PS1" ]; then
  
-    # set terminal titlebar
-    PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME%%.*}: ${PWD/$HOME/~}\007"'
-    # define the prompt
+    # changes the window title in terminals like putty or konsole
+    echo -ne "\033]0; ${USER}@${HOSTNAME}  +${SHLVL} @${SSH_TTY/\/dev\/} - `uptime1` \007"
 
-	scm_ps1() {
+    # check if there is a repo (svno r git) and show some information
+    scm_ps1() {
     		local s=
     		if [[ -d ".svn" ]] ; then # we got SVN Repo
         		s=\(svn:$(svn info | sed -n -e '/^Revision: \([0-9]*\).*$/s//\1/p' )\)
