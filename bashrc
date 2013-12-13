@@ -45,6 +45,45 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     	. /etc/bash_completion
 fi
 
+# go some dirs up 
+#http://www.sudobash.net/bash-functions/
+up () {
+
+        if [[ $1 != '' ]]; then
+         COUNTER=$1
+        else
+         COUNTER=1
+        fi
+        while [[ $COUNTER -gt 0 ]]
+         do
+          UP="${UP}../"
+          COUNTER=$(( $COUNTER -1 ))
+         done
+        echo "cd $UP"
+        cd $UP
+        UP=''
+}
+
+# find dirs with most space usage
+#http://www.sudobash.net/bash-functions/
+function spaceHog () 
+{ 
+    du -k | sort -n | awk '
+BEGIN {
+    split("KB,MB,GB,TB", Units, ",");
+}
+{
+    u = 1;
+    while ($1 >= 1024) {
+        $1 = $1 / 1024; 
+        u += 1;
+    }
+    $1 = sprintf("%.1f %s", $1, Units[u]);
+    print $0;
+}'
+}
+
+
 # Shell Prompt Build
 if [ "$PS1" ]; then
  
